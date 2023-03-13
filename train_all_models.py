@@ -60,7 +60,7 @@ data = data.drop('id', axis=1)
 
 
 #################################################################################################################
-data = data.iloc[ : 1000 ].reset_index(drop=True)
+# data = data.iloc[ : 1000 ].reset_index(drop=True)
 #################################################################################################################
 
 
@@ -162,8 +162,8 @@ idx = int(0.7 * length_of_data)
 # data_train = data.iloc[      : 50000].reset_index(drop=True)
 # data_test  = data.iloc[50000 : 80000].reset_index(drop=True)
 
-data_train = data.iloc[      : 700].reset_index(drop=True)
-data_test  = data.iloc[700   : 999].reset_index(drop=True)
+data_train = data.iloc[      : idx].reset_index(drop=True)
+data_test  = data.iloc[idx   :    ].reset_index(drop=True)
 
 dataset_train = TrainData(data_train)
 dataset_test  = TrainData(data_test)
@@ -268,7 +268,7 @@ for e in range(epochs):
     print(f'Epoch  : {e+1:3}/{epochs}    |   Train Loss:  : {avg_train_loss:.8f}     |  Test Loss:  : {avg_test_loss:.8f}  |  Accuracy  :   {avg_running_accuracy:.4f}')
 
 torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_models/trained_all_model')
-
+torch.save({ "model_state": model.state_dict(), 'max_seq_len' : 64, 'emb_dim' : 64, 'hidden1' : 32, 'hidden2' : 32}, 'trained_models/trained_model_for_website')
 
 plt.plot(all_train_losses, label='Train Loss')
 plt.plot(all_test_losses,  label='Test Loss')
